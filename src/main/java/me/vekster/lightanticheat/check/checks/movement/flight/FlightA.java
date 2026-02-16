@@ -136,7 +136,7 @@ public class FlightA extends MovementCheck implements Listener {
             }
         }
 
-        if (currentTime - buffer.getLong("lastScaffoldPlace") <= 400L) {
+        if (currentTime - buffer.getLong("lastSupportPlace") <= 400L) {
             buffer.put("flightTicks", 0);
             return;
         }
@@ -243,7 +243,7 @@ public class FlightA extends MovementCheck implements Listener {
         Set<Player> players = getPlayersForEnchantsSquared(lacPlayer, player);
         updateDownBlocks(player, lacPlayer, event.getToDownBlocks());
         Scheduler.runTask(true, () -> {
-            if (currentTime - buffer.getLong("lastScaffoldPlace") <= 400L ||
+            if (currentTime - buffer.getLong("lastSupportPlace") <= 400L ||
                     lacPlayer.isGliding() || lacPlayer.isRiptiding()) {
                 buffer.put("flightTicks", 0);
                 return;
@@ -319,7 +319,7 @@ public class FlightA extends MovementCheck implements Listener {
     }
 
     @EventHandler
-    public void scaffoldAsyncBlockPlace(LACAsyncPlayerPlaceBlockEvent event) {
+    public void supportAsyncBlockPlace(LACAsyncPlayerPlaceBlockEvent event) {
         if (isActuallyPassable(event.getBlock()))
             return;
         Block placedBlock = event.getBlock();
@@ -334,7 +334,7 @@ public class FlightA extends MovementCheck implements Listener {
         if (!within)
             return;
         Buffer buffer = getBuffer(event.getPlayer(), true);
-        buffer.put("lastScaffoldPlace", System.currentTimeMillis());
+        buffer.put("lastSupportPlace", System.currentTimeMillis());
     }
 
     private static boolean equals(Block block1, Block block2) {

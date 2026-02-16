@@ -80,8 +80,7 @@ public class FloodgateHook {
 
     @SecureAsync
     public static boolean isCancelledCombat(CheckName checkName, Player player, boolean async) {
-        if (checkName != CheckName.KILLAURA_B &&
-                checkName != CheckName.REACH_A && checkName != CheckName.REACH_B)
+        if (checkName != CheckName.KILLAURA_B)
             return false;
         if (!isProbablyPocketEditionPlayer(player, async))
             return false;
